@@ -140,7 +140,7 @@ document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.g
 if(location.hash&&document.getElementById(location.hash.slice(1)))show(location.hash.slice(1));
 
 /* ---- Espace membre : comptes + absences (Supabase) ---- */
-const SUPABASE_URL="https://supabase.com/dashboard/project/ytuhqrprwxwaclopdwzi";
+const SUPABASE_URL="https://ytuhqrprwxwaclopdwzi.supabase.co/rest/v1/";
 const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dWhxcnByd3h3YWNsb3Bkd3ppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwMTY0NjQsImV4cCI6MjEwNzU5MjQ2NH0.t9pPxHBvQapFEjkom85ATl9nlGmd5sc5BWwimfB99Ag";
 const box=$("#account");
 const sb=(!SUPABASE_URL.startsWith("COLLE")&&window.supabase)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
