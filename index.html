@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Compagnie du Cerf Cendré</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700&family=Lato:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0a0b;--surface:#141416;--text:#ecedee;--muted:#9a9ea3;--accent:#c4c9cf;--accent2:#8d949b;--line:#2a2c30;color-scheme:dark;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+
+
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 Lato,system-ui,sans-serif}
+h1,h2,h3{font-family:Cinzel,Georgia,serif;margin:0 0 .5em}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:2px solid var(--accent);display:flex;flex-wrap:wrap;align-items:center;gap:.5rem 1.2rem;padding:.7rem 1.2rem}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--surface);z-index:10}
+.logo{font-family:Cinzel,Georgia,serif;font-weight:700;font-size:1.15rem;color:var(--accent);margin-right:auto}
+nav{display:flex;flex-wrap:wrap;gap:.2rem}
+nav button{background:none;border:0;color:var(--text);font:700 .95rem Lato,sans-serif;padding:.45rem .8rem;border-radius:6px;cursor:pointer}
+nav button:hover{background:var(--line)}
+nav button.on{background:var(--accent);color:#0a0a0b}
+main{max-width:980px;margin:0 auto;padding:1.5rem 1.2rem 3rem}
+section{display:none}section.on{display:block}
+.hero{text-align:center;padding:3rem 1rem;border:1px solid var(--line);border-radius:14px;background:linear-gradient(160deg,var(--surface),var(--bg))}
+.hero .crest{font-size:3.4rem;line-height:1}
+.hero h1{font-size:clamp(1.8rem,5vw,2.8rem);color:var(--accent);text-shadow:0 0 24px rgba(196,201,207,.25)}
+.hero p{max-width:560px;margin:0 auto 1.2rem;color:var(--muted)}
+.btn{background:var(--accent);color:#0a0a0b;border:0;border-radius:8px;padding:.65rem 1.3rem;font:700 1rem Lato,sans-serif;cursor:pointer}
+.btn.ghost{background:none;color:var(--accent);border:1px solid var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.2rem}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.1rem}
+.card h3{font-size:1.05rem;color:var(--accent)}
+.card .role{font-size:.85rem;color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
+.card p{margin:.3rem 0 0;color:var(--muted);font-size:.95rem}
+.badge{display:inline-block;font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:.1rem .6rem;margin:.2rem .2rem 0 0;color:var(--muted)}
+label{display:block;font-weight:700;margin:.8rem 0 .25rem;font-size:.9rem}
+input,textarea{width:100%;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem}
+.abs{display:flex;justify-content:space-between;align-items:center;gap:1rem;border-bottom:1px solid var(--line);padding:.6rem 0}
+.abs small{color:var(--muted)}
+.abs button{background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;cursor:pointer;padding:.2rem .6rem}
+.note{color:var(--muted);font-size:.9rem}
+footer{text-align:center;color:var(--muted);font-size:.85rem;padding:1.5rem}
+@media(max-width:520px){.row{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header>
+  <div class="logo">🦌 Cerf Cendré</div>
+  <nav id="nav">
+    <button data-p="accueil" class="on">Accueil</button>
+    <button data-p="presentation">Présentation</button>
+    <button data-p="membres">Membres</button>
+    <button data-p="specialites">Spécialités</button>
+    <button data-p="espace">Espace membre</button>
+  </nav>
+</header>
+<main>
+
+<section id="accueil" class="on">
+  <div class="hero">
+    <div class="crest">🦌</div>
+    <h1>Compagnie du Cerf Cendré</h1>
+    <p>Une compagnie de chevaliers-mages du Royaume du Trèfle, unie par la loyauté, la discrétion et la force des cendres.</p>
+    <button class="btn" data-go="presentation">Découvrir la compagnie</button>
+    <button class="btn ghost" data-go="espace">Espace membre</button>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Notre devise</h3><p>« De la cendre naît la flamme. »</p></div>
+    <div class="card"><h3>Prochaine mission</h3><p>À définir par le Capitaine.</p></div>
+    <div class="card"><h3>Rejoindre</h3><p>Contacte un officier de la compagnie.</p></div>
+  </div>
+</section>
+
+<section id="presentation">
+  <h2>Présentation</h2>
+  <div class="card">
+    <p>Fondée dans l'ombre des grandes compagnies, la Compagnie du Cerf Cendré rassemble des mages qui ne cherchent pas la gloire, mais l'efficacité. Là où d'autres brillent, nous travaillons dans la discrétion : reconnaissance, protection, interventions rapides.</p>
+    <p>Chaque membre apporte sa magie, son histoire et sa loyauté. Ensemble, nous formons une bête que rien n'arrête : le Cerf qui renaît de ses cendres.</p>
+  </div>
+  <div class="grid">
+    <div class="card"><h3>Valeurs</h3><p>Loyauté · Entraide · Discrétion · Dépassement de soi</p></div>
+    <div class="card"><h3>Emblème</h3><p>Un cerf aux bois de braise sur fond gris cendre.</p></div>
+    <div class="card"><h3>Base</h3><p>À compléter : lieu de la caserne de la compagnie.</p></div>
+  </div>
+</section>
+
+<section id="membres">
+  <h2>Membres</h2>
+  <p class="note">Noms d'exemple, à remplacer par ceux de ta compagnie.</p>
+  <div class="grid" id="members"></div>
+</section>
+
+<section id="specialites">
+  <h2>Spécialités</h2>
+  <div class="grid" id="specs"></div>
+</section>
+
+<section id="espace">
+  <h2>Espace membre</h2>
+  <div id="account"><p class="note">Chargement…</p></div>
+</section>
+
+</main>
+<footer>Compagnie du Cerf Cendré · Royaume du Trèfle</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script>
+const MEMBERS=[
+ ["Capitaine (nom à définir)","Capitaine","Magie de Feu","Dirige la compagnie et tranche en dernier recours."],
+ ["Vice-capitaine (nom à définir)","Vice-capitaine","Magie de Vent","Second du Capitaine, gère l'organisation."],
+ ["Membre 3","Mage d'assaut","Magie de Cendre","Première ligne lors des combats."],
+ ["Membre 4","Mage de soutien","Magie de Soin","Veille sur les blessés."],
+ ["Membre 5","Éclaireur","Magie Spatiale","Reconnaissance et déplacements."],
+ ["Recrue","Apprenti","Magie à éveiller","En formation auprès des anciens."]
+];
+const SPECS=[
+ ["🔥","Assaut","Magie offensive pour briser les lignes ennemies."],
+ ["🛡️","Défense","Barrières et protections pour couvrir la compagnie."],
+ ["💚","Soin","Soigner, stabiliser et maintenir le groupe au combat."],
+ ["🌀","Reconnaissance","Détection, infiltration et collecte d'informations."],
+ ["🪄","Soutien","Renforts, malédictions et contrôle du terrain."]
+];
+const $=s=>document.querySelector(s);
+const esc=s=>String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+$("#members").innerHTML=MEMBERS.map(m=>`<div class="card"><div class="role">${esc(m[1])}</div><h3>${esc(m[0])}</h3><span class="badge">${esc(m[2])}</span><p>${esc(m[3])}</p></div>`).join("");
+$("#specs").innerHTML=SPECS.map(s=>`<div class="card"><div style="font-size:2rem">${s[0]}</div><h3>${esc(s[1])}</h3><p>${esc(s[2])}</p></div>`).join("");
+
+function show(p){
+  document.querySelectorAll("section").forEach(s=>s.classList.toggle("on",s.id===p));
+  document.querySelectorAll("#nav button").forEach(b=>b.classList.toggle("on",b.dataset.p===p));
+  try{history.replaceState(null,"","#"+p)}catch(e){}
+  window.scrollTo(0,0);
+}
+document.querySelectorAll("#nav button").forEach(b=>b.onclick=()=>show(b.dataset.p));
+document.querySelectorAll("[data-go]").forEach(b=>b.onclick=()=>show(b.dataset.go));
+if(location.hash&&document.getElementById(location.hash.slice(1)))show(location.hash.slice(1));
+
+/* ---- Espace membre : comptes + absences (Supabase) ---- */
+const SUPABASE_URL="https://supabase.com/dashboard/project/ytuhqrprwxwaclopdwzi";
+const SUPABASE_KEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inl0dWhxcnByd3h3YWNsb3Bkd3ppIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIwMTY0NjQsImV4cCI6MjEwNzU5MjQ2NH0.t9pPxHBvQapFEjkom85ATl9nlGmd5sc5BWwimfB99Ag";
+const box=$("#account");
+const sb=(!SUPABASE_URL.startsWith("COLLE")&&window.supabase)?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+let me=null;
+async function loadMe(){
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session){me=null;return}
+  const {data}=await sb.from("profiles").select("name,is_admin").eq("id",session.user.id).maybeSingle();
+  me={id:session.user.id,name:(data&&data.name)||session.user.email,admin:!!(data&&data.is_admin)};
+}
+async function loadList(){
+  const today=new Date().toISOString().slice(0,10);
+  const {data,error}=await sb.from("absences").select("id,user_id,date_from,date_to,why,profiles(name)").gte("date_to",today).order("date_from");
+  if(error){$("#list").innerHTML='<p class="note">Lecture impossible.</p>';return}
+  const f=x=>new Date(x+"T00:00").toLocaleDateString("fr-FR",{day:"numeric",month:"short"});
+  $("#list").innerHTML=data.length?data.map(r=>`<div class="abs"><div><strong>${esc((r.profiles&&r.profiles.name)||"Membre")}</strong> · ${f(r.date_from)}${r.date_to!==r.date_from?" → "+f(r.date_to):""}<br><small>${esc(r.why||"Sans motif")}</small></div>${(r.user_id===me.id||me.admin)?`<button data-del="${esc(r.id)}">Annuler</button>`:""}</div>`).join(""):'<p class="note">Aucune absence à venir.</p>';
+  document.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{await sb.from("absences").delete().eq("id",b.dataset.del);loadList()});
+}
+function draw(){
+  if(!sb){box.innerHTML='<div class="card"><h3>Espace membre non configuré</h3><p class="note">Renseigne SUPABASE_URL et SUPABASE_KEY dans index.html (voir le README).</p></div>';return}
+  if(!me){
+    box.innerHTML='<div class="card"><h3>Connexion</h3><form id="lf"><label>E-mail</label><input id="lu" type="email" autocomplete="username"><label>Mot de passe</label><input id="lp" type="password" autocomplete="current-password"><p><button class="btn" type="submit">Se connecter</button> <span id="lm" class="note"></span></p></form><p class="note">Pas de compte ? Demande-en un à un officier.</p></div>';
+    $("#lf").onsubmit=async e=>{
+      e.preventDefault();
+      const {error}=await sb.auth.signInWithPassword({email:$("#lu").value.trim(),password:$("#lp").value});
+      if(error){$("#lm").textContent="E-mail ou mot de passe incorrect.";return}
+      await loadMe();draw();
+    };
+    return;
+  }
+  box.innerHTML=`<div class="card"><h3>Bienvenue, ${esc(me.name)} 🦌</h3>
+  <p class="note">Signale ici tes absences pour que la compagnie s'organise.</p>
+  <div class="row"><div><label>Du</label><input type="date" id="d1"></div><div><label>Au</label><input type="date" id="d2"></div></div>
+  <label>Motif (facultatif)</label><textarea id="why" rows="2" maxlength="200"></textarea>
+  <p><button class="btn" id="send" type="button">Signaler mon absence</button> <button class="btn ghost" id="out" type="button">Se déconnecter</button> <span id="msg" class="note"></span></p></div>
+  <h3 style="margin-top:1.6rem">Planning des absences</h3><div id="list" class="card"><p class="note">Chargement…</p></div>`;
+  $("#send").onclick=async()=>{
+    const a=$("#d1").value,b=$("#d2").value||a,msg=$("#msg");
+    if(!a){msg.textContent="Choisis une date de début.";return}
+    if(b<a){msg.textContent="La date de fin précède le début.";return}
+    const {error}=await sb.from("absences").insert({date_from:a,date_to:b,why:$("#why").value.trim()});
+    if(error){msg.textContent="Impossible d'enregistrer.";return}
+    $("#d1").value=$("#d2").value=$("#why").value="";msg.textContent="Absence enregistrée ✔";loadList();
+  };
+  $("#out").onclick=async()=>{await sb.auth.signOut();me=null;draw()};
+  loadList();
+}
+(async()=>{if(sb){try{await loadMe()}catch(e){me=null}}draw()})();
+</script>
+</body>
+</html>
