@@ -39,6 +39,10 @@ section{display:none}section.on{display:block}
 .card .role{font-size:.85rem;color:var(--accent2);font-weight:700;text-transform:uppercase;letter-spacing:.05em}
 .card p{margin:.3rem 0 0;color:var(--muted);font-size:.95rem}
 .portrait{display:block;width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:10px;border:1px solid var(--line);margin-bottom:.9rem}
+.report{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;margin-top:.7rem}
+.report summary{cursor:pointer}
+.rbody{white-space:pre-wrap;margin-top:.7rem}
+.report .del{margin-top:.8rem;background:none;border:1px solid var(--line);color:var(--muted);border-radius:6px;cursor:pointer;padding:.2rem .6rem}
 .badge{display:inline-block;font-size:.78rem;border:1px solid var(--line);border-radius:99px;padding:.1rem .6rem;margin:.2rem .2rem 0 0;color:var(--muted)}
 label{display:block;font-weight:700;margin:.8rem 0 .25rem;font-size:.9rem}
 input,textarea{width:100%;padding:.55rem .7rem;border:1px solid var(--line);border-radius:8px;background:var(--bg);color:var(--text);font:inherit}
@@ -174,6 +178,12 @@ async function loadList(){
   $("#list").innerHTML=data.length?data.map(r=>`<div class="abs"><div><strong>${esc((r.profiles&&r.profiles.name)||"Membre")}</strong> · ${f(r.date_from)}${r.date_to!==r.date_from?" → "+f(r.date_to):""}<br><small>${esc(r.why||"Sans motif")}</small></div>${(r.user_id===me.id||me.admin)?`<button data-del="${esc(r.id)}">Annuler</button>`:""}</div>`).join(""):'<p class="note">Aucune absence à venir.</p>';
   document.querySelectorAll("[data-del]").forEach(b=>b.onclick=async()=>{await sb.from("absences").delete().eq("id",b.dataset.del);loadList()});
 }
+async function loadReports(){
+  const {data,error}=await sb.from("reports").select("id,user_id,title,body,created_at,profiles(name)").order("created_at",{ascending:false}).limit(50);
+  if(error){$("#rlist").innerHTML='<p class="note">Lecture impossible (la table des rapports est-elle créée ?).</p>';return}
+  $("#rlist").innerHTML=data.length?data.map(r=>`<details class="report"><summary><strong>${esc(r.title)}</strong><span class="note"> · ${esc((r.profiles&&r.profiles.name)||"Membre")} · ${new Date(r.created_at).toLocaleDateString("fr-FR")}</span></summary><div class="rbody">${esc(r.body)}</div>${(r.user_id===me.id||me.admin)?`<button class="del" data-rdel="${esc(r.id)}">Supprimer</button>`:""}</details>`).join(""):'<p class="note">Aucun rapport pour le moment.</p>';
+  document.querySelectorAll("[data-rdel]").forEach(b=>b.onclick=async()=>{if(!confirm("Supprimer ce rapport ?"))return;await sb.from("reports").delete().eq("id",b.dataset.rdel);loadReports()});
+}
 function draw(){
   if(!sb){box.innerHTML='<div class="card"><h3>Espace membre non configuré</h3><p class="note">Renseigne SUPABASE_URL et SUPABASE_KEY dans index.html (voir le README).</p></div>';return}
   if(!me){
@@ -191,7 +201,12 @@ function draw(){
   <div class="row"><div><label>Du</label><input type="date" id="d1"></div><div><label>Au</label><input type="date" id="d2"></div></div>
   <label>Motif (facultatif)</label><textarea id="why" rows="2" maxlength="200"></textarea>
   <p><button class="btn" id="send" type="button">Signaler mon absence</button> <button class="btn ghost" id="out" type="button">Se déconnecter</button> <span id="msg" class="note"></span></p></div>
-  <h3 style="margin-top:1.6rem">Planning des absences</h3><div id="list" class="card"><p class="note">Chargement…</p></div>`;
+  <h3 style="margin-top:1.6rem">Planning des absences</h3><div id="list" class="card"><p class="note">Chargement…</p></div>
+  <h3 style="margin-top:2rem">Rapports de mission</h3>
+  <div class="card"><label>Titre</label><input id="rt" maxlength="120" placeholder="Ex : Reconnaissance de la forêt du Nord">
+  <label>Rapport</label><textarea id="rc" rows="6" maxlength="5000" placeholder="Déroulé, résultats, blessés, observations…"></textarea>
+  <p><button class="btn" id="rsend" type="button">Publier le rapport</button> <span id="rmsg" class="note"></span></p></div>
+  <div id="rlist"><p class="note">Chargement…</p></div>`;
   $("#send").onclick=async()=>{
     const a=$("#d1").value,b=$("#d2").value||a,msg=$("#msg");
     if(!a){msg.textContent="Choisis une date de début.";return}
@@ -201,7 +216,14 @@ function draw(){
     $("#d1").value=$("#d2").value=$("#why").value="";msg.textContent="Absence enregistrée ✔";loadList();
   };
   $("#out").onclick=async()=>{await sb.auth.signOut();me=null;draw()};
-  loadList();
+  $("#rsend").onclick=async()=>{
+    const t=$("#rt").value.trim(),c=$("#rc").value.trim(),m=$("#rmsg");
+    if(!t||!c){m.textContent="Ajoute un titre et un contenu.";return}
+    const {error}=await sb.from("reports").insert({title:t,body:c});
+    if(error){m.textContent="Impossible de publier (table des rapports créée ?).";return}
+    $("#rt").value=$("#rc").value="";m.textContent="Rapport publié ✔";loadReports();
+  };
+  loadList();loadReports();
 }
 (async()=>{if(sb){try{await loadMe()}catch(e){me=null}}draw()})();
 </script>
